@@ -11,10 +11,14 @@ public class ControllerManager : MonoBehaviour
     private Vector3 previousPosition;  // Previous position of the controller for velocity calculation
     private bool isGrip = false;
 
+    public CharacterController gameCharacter;
+    private Collider gameCharacterCollider;
+    
     // Start is called before the first frame update
     void Start()
     {
         previousPosition = transform.position;  // Initialize previous position for velocity calculation
+        gameCharacterCollider = gameCharacter.GetComponent<Collider>();
     }
 
     void Update(){
