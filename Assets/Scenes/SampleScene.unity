@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: 1
-  alwaysUseGrip: 0
+  alwaysUseGrip: 1
 --- !u!114 &65284399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,7 +786,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftController: {fileID: 65284398}
+  rightController: {fileID: 40919616}
   camera: {fileID: 1114040585}
+  rotationSpeed: 100
   speed: 10
 --- !u!143 &223974233
 CharacterController:
