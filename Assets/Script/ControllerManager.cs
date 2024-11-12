@@ -43,6 +43,9 @@ public class ControllerManager : MonoBehaviour
         if (currentRigidBody == null)
             return;
         
+        Collider objectCollider = currentRigidBody.GetComponent<Collider>();
+        Physics.IgnoreCollision(gameCharacterCollider, objectCollider);
+        
         currentRigidBody.MovePosition(transform.position);
         currentRigidBody.MoveRotation(transform.rotation);
         
@@ -54,7 +57,8 @@ public class ControllerManager : MonoBehaviour
     {          
         if (currentRigidBody == null)
             return;
-
+        Collider objectCollider = currentRigidBody.GetComponent<Collider>();
+        Physics.IgnoreCollision(gameCharacterCollider, objectCollider, false);
         currentRigidBody.isKinematic = false;  // Re-enable physics when dropping the object
         currentRigidBody.velocity = currentVelocity;  // Apply the current velocity to the object to simulate throwing
     }
@@ -63,7 +67,7 @@ public class ControllerManager : MonoBehaviour
     // Detect when the controller touches a grabbable object
     private void OnTriggerEnter(Collider other)
     {
-        if (other.attachedRigidbody != null)
+        if (other.CompareTag("Grabbable") && other.attachedRigidbody != null)
         {
             // Assign the object as the one to grab
             currentRigidBody = other.attachedRigidbody;
@@ -73,7 +77,8 @@ public class ControllerManager : MonoBehaviour
     // Detect when the controller stops touching a grabbable object
     private void OnTriggerExit(Collider other)
     {
-        // Clear the reference when the controller leaves the object
-        currentRigidBody = null;
+        if(other.CompareTag("Grabbable"))
+            // Clear the reference when the controller leaves the object
+            currentRigidBody = null;
     }
 }
